@@ -56,6 +56,32 @@ Depois use o YAML criado no treino:
 python scripts/train.py --data data/find3dprint.yaml --epochs 80 --imgsz 640 --batch 8
 ```
 
+Para treinar com Detectron2/Faster R-CNN, prepare o mesmo COCO assim:
+
+```bash
+python scripts/prepare_detectron2_coco.py --input datasets/Find3dprint.coco --output datasets/Find3dprint.detectron2
+```
+
+Estrutura gerada:
+
+```text
+datasets/Find3dprint.detectron2/
++-- annotations/
+|   +-- train.json
+|   +-- val.json
+|   +-- test.json
++-- images/
+    +-- train/
+    +-- val/
+    +-- test/
+```
+
+Treino Detectron2:
+
+```bash
+python scripts/train_detectron2.py --dataset-root datasets/Find3dprint.detectron2 --output runs/detectron2/find3dprint --max-iter 1000 --ims-per-batch 2 --device cuda --eval-test
+```
+
 ## Aumento de Dados YOLO
 
 Para aumentar o conjunto convertido em YOLO:

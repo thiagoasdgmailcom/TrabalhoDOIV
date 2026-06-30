@@ -41,8 +41,11 @@ Se o dataset escolhido tiver outras classes, ajuste o arquivo
 |   +-- download_successful_3d_prints.py # Baixa impressoes 3D bem-sucedidas
 |   +-- detect_3d_printed_objects.py # Detecta apenas objetos impressos 3D
 |   +-- live_detect.py              # Deteccao em tempo real pela webcam/camera
+|   +-- prepare_detectron2_coco.py  # Prepara COCO/Roboflow para Detectron2
+|   +-- predict_detectron2.py       # Predicao/visualizacao com Detectron2
 |   +-- predict.py                  # Predicao em imagens, videos ou webcam
 |   +-- train.py                    # Treinamento com yolov8n.pt
+|   +-- train_detectron2.py         # Treinamento Faster R-CNN/Detectron2
 |   +-- validate.py                 # Validacao/teste e metricas
 |   +-- webcam_object_test.py        # Teste simples do YOLO pela webcam
 +-- slides/
@@ -135,6 +138,56 @@ No dataset `Find3dprint.yolo`, o resultado atual ficou:
 
 Observacao: imagens aumentadas ajudam o treino e a demonstracao, mas nao
 substituem novas imagens reais anotadas para medir generalizacao.
+
+## Detectron2 no Ubuntu
+
+O notebook `TrabalhoDOIV_v1.ipynb` usava Colab, Google Drive e Detectron2. Para
+rodar o mesmo tipo de fluxo em Ubuntu, use os scripts Detectron2 do projeto.
+
+Prepare o ambiente:
+
+```bash
+cd /mnt/disk1/PythonIA/TrabalhoDOIV
+python3 -m venv venv
+source venv/bin/activate
+python -m pip install --upgrade pip wheel setuptools
+pip install -r requirements-detectron2.txt
+pip install 'git+https://github.com/facebookresearch/detectron2.git'
+```
+
+Se o PyTorch com CUDA ja estiver instalado, como no ambiente que mostrou
+`torch-2.12.1+cu130`, nao reinstale PyTorch. Se ainda nao estiver, instale
+`torch` e `torchvision` conforme a versao de CUDA da maquina antes do Detectron2.
+
+Prepare o COCO exportado pelo Roboflow para Detectron2:
+
+```bash
+python scripts/prepare_detectron2_coco.py --input datasets/Find3dprint.coco --output datasets/Find3dprint.detectron2
+```
+
+Treine com Faster R-CNN:
+
+```bash
+python scripts/train_detectron2.py --dataset-root datasets/Find3dprint.detectron2 --output runs/detectron2/find3dprint --max-iter 1000 --ims-per-batch 2 --device cuda --eval-test
+```
+
+Se faltar memoria na GPU, reduza o batch:
+
+```bash
+python scripts/train_detectron2.py --dataset-root datasets/Find3dprint.detectron2 --output runs/detectron2/find3dprint --max-iter 1000 --ims-per-batch 1 --roi-batch-size 32 --device cuda --eval-test
+```
+
+O modelo final fica em:
+
+```text
+runs/detectron2/find3dprint/model_final.pth
+```
+
+Gere imagens com bounding boxes:
+
+```bash
+python scripts/predict_detectron2.py --dataset-root datasets/Find3dprint.detectron2 --weights runs/detectron2/find3dprint/model_final.pth --split test --output runs/detectron2/predictions --num-samples 8
+```
 
 ## Coleta de Imagens Brutas
 

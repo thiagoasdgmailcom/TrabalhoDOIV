@@ -1,0 +1,8 @@
+# Dependencias auxiliares para os scripts Detectron2.
+# Instale torch/torchvision conforme sua CUDA antes de instalar detectron2.
+numpy>=1.26.0
+opencv-python>=4.10.0
+matplotlib>=3.9.0
+pycocotools>=2.0.8
+Pillow>=10.4.0
+pyyaml>=6.0.0
