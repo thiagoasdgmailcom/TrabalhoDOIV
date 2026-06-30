@@ -1,0 +1,15 @@
+# Dataset YOLO para deteccao de objetos/falhas em impressao 3D.
+# Ajuste "path" e "names" conforme o dataset escolhido.
+
+path: ../datasets/3d_printing_defects
+train: images/train
+val: images/val
+test: images/test
+
+names:
+  0: printed_part
+  1: spaghetti
+  2: warping
+  3: stringing
+  4: layer_shift
+  5: under_extrusion

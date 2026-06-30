@@ -1,0 +1,44 @@
+# Termos de busca para coletar imagens brutas de impressao 3D.
+# Ajuste livremente conforme o dataset ficar mais claro.
+
+classes:
+  printed_part:
+    - "3d printer printing object"
+    - "3d printer printing close up"
+    - "3d printed object on print bed"
+    - "impressora 3d imprimindo peca"
+
+  spaghetti:
+    - "3d print spaghetti failure"
+    - "3d printer spaghetti failure"
+    - "failed 3d print spaghetti"
+    - "3d printing filament spaghetti"
+    - "falha impressao 3d spaghetti"
+
+  warping:
+    - "3d print warping defect"
+    - "warped 3d print"
+    - "3d printing warping corners"
+    - "3d print bed adhesion warping"
+    - "empenamento impressao 3d"
+
+  stringing:
+    - "3d print stringing defect"
+    - "3d printer stringing"
+    - "3d printing oozing stringing"
+    - "3d print thin strings between parts"
+    - "falha stringing impressao 3d"
+
+  layer_shift:
+    - "3d print layer shift defect"
+    - "3d printer layer shift"
+    - "failed 3d print layer shift"
+    - "3d printing shifted layers"
+    - "deslocamento de camada impressao 3d"
+
+  under_extrusion:
+    - "3d print under extrusion defect"
+    - "under extruded 3d print"
+    - "3d printer under extrusion"
+    - "3d print missing material lines"
+    - "sub extrusao impressao 3d"

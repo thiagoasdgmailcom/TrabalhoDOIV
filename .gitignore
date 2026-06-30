@@ -216,3 +216,11 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# DOIV / YOLO artifacts
+runs/
+*.pt
+*.onnx
+*.engine
+datasets/*
+!datasets/README.md
