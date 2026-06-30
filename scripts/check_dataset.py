@@ -3,7 +3,10 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
-import yaml
+try:
+    import yaml
+except ModuleNotFoundError:
+    yaml = None
 
 IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".bmp", ".webp"}
 
@@ -21,6 +24,12 @@ def parse_args() -> argparse.Namespace:
 
 
 def load_dataset_config(data_path: Path) -> dict:
+    if yaml is None:
+        raise SystemExit(
+            "Dependencia ausente: PyYAML\n"
+            "Instale com: pip install -r requirements.txt"
+        )
+
     if not data_path.exists():
         raise FileNotFoundError(f"Arquivo de configuracao nao encontrado: {data_path}")
 

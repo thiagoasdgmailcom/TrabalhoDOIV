@@ -3,7 +3,10 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
-from ultralytics import YOLO
+try:
+    from ultralytics import YOLO
+except ModuleNotFoundError:
+    YOLO = None
 
 
 def parse_args() -> argparse.Namespace:
@@ -30,8 +33,17 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
+def ensure_dependencies() -> None:
+    if YOLO is None:
+        raise SystemExit(
+            "Dependencia ausente: ultralytics\n"
+            "Instale com: pip install -r requirements.txt"
+        )
+
+
 def main() -> None:
     args = parse_args()
+    ensure_dependencies()
     model = YOLO(args.model)
 
     train_kwargs = {

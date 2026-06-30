@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 1
+names: ['3d print']
+
+roboflow:
+  workspace: thiagos-workspace-f58tv
+  project: find-3d-print
+  version: dataset
+  license: Public Domain
+  url: https://universe.roboflow.com/thiagos-workspace-f58tv/find-3d-print/dataset/dataset

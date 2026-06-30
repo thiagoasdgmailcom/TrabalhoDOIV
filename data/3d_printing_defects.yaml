@@ -1,7 +1,7 @@
 # Dataset YOLO para deteccao de objetos/falhas em impressao 3D.
 # Ajuste "path" e "names" conforme o dataset escolhido.
 
-path: ../datasets/3d_printing_defects
+path: ../datasets/Find3dprint.coco
 train: images/train
 val: images/val
 test: images/test

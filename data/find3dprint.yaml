@@ -1,0 +1,8 @@
+# Dataset convertido de COCO/Roboflow para YOLO.
+path: datasets/Find3dprint.yolo
+train: images/train
+val: images/val
+test: images/test
+
+names:
+  0: "3d print"
