@@ -223,4 +223,5 @@ runs/
 *.onnx
 *.engine
 datasets/*
+!datasets/Find3dprint.yolo
 !datasets/README.md
