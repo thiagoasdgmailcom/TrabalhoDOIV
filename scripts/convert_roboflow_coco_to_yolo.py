@@ -174,10 +174,9 @@ def convert_split(
 
 def write_data_yaml(data_yaml: Path, output_dir: Path, names: list[str]) -> None:
     data_yaml.parent.mkdir(parents=True, exist_ok=True)
-    relative_output = Path("..") / output_dir.as_posix()
     lines = [
         "# Dataset convertido de COCO/Roboflow para YOLO.",
-        f"path: {relative_output.as_posix()}",
+        f"path: {output_dir.as_posix()}",
         "train: images/train",
         "val: images/val",
         "test: images/test",

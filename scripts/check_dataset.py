@@ -39,9 +39,18 @@ def load_dataset_config(data_path: Path) -> dict:
 
 def resolve_dataset_path(data_path: Path, config: dict) -> Path:
     root = Path(config["path"])
-    if not root.is_absolute():
-        root = (data_path.parent / root).resolve()
-    return root
+    if root.is_absolute():
+        return root
+
+    cwd_relative = root.resolve()
+    data_file_relative = (data_path.parent / root).resolve()
+
+    if cwd_relative.exists():
+        return cwd_relative
+    if data_file_relative.exists():
+        return data_file_relative
+
+    return cwd_relative
 
 
 def collect_images(split_dir: Path) -> list[Path]:
